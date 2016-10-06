@@ -1,1 +1,7 @@
 D:\Documents\Repos\CSC4104Project\PrettyPrinter\PrettyPrinter\bin\Debug\PrettyPrinter.exe.config
+D:\PrettyPrinter\PrettyPrinter\bin\Debug\PrettyPrinter.exe.config
+D:\PrettyPrinter\PrettyPrinter\bin\Debug\PrettyPrinter.exe
+D:\PrettyPrinter\PrettyPrinter\bin\Debug\PrettyPrinter.pdb
+D:\PrettyPrinter\PrettyPrinter\obj\Debug\PrettyPrinter.csprojResolveAssemblyReference.cache
+D:\PrettyPrinter\PrettyPrinter\obj\Debug\PrettyPrinter.exe
+D:\PrettyPrinter\PrettyPrinter\obj\Debug\PrettyPrinter.pdb
