@@ -75,13 +75,14 @@ namespace Parse
 
                     //edit
                     int i = 0;
-                    while(In.Peek() != '"')
+                    ch = In.Read();
+                    while(ch != '"')
                     {
-                        buf[i] = (char) In.Read();
+                        buf[i] = (char) ch;
                         i++;
+                        ch = In.Read();
                     }
-                    String str = new string(buf, 0, i + 1);
-                    str = str.Replace(Convert.ToChar(0x0).ToString(), "");
+                    String str = new string(buf, 0, i);
 
                     return new StringToken(str);
                     //end edit
@@ -169,4 +170,3 @@ namespace Parse
     }
 
 }
-
