@@ -12,7 +12,7 @@ namespace Parse
 
         // maximum length of strings and identifier
         private const int BUFSIZE = 1000;
-        private char[] buf = new char[BUFSIZE];
+        private char[] buf;
 
         public Scanner(TextReader i) { In = i; }
   
@@ -21,7 +21,7 @@ namespace Parse
         public Token getNextToken()
         {
             int ch;
-
+            buf =  new char[BUFSIZE];
             try
             {
                 // It would be more efficient if we'd maintain our own
@@ -75,12 +75,16 @@ namespace Parse
 
                     //edit
                     int i = 0;
-                    while(In.Peek() != '"')
+                    ch = In.Read();
+                    while(ch != '"')
                     {
-                        buf[i] = (char) In.Read();
+                        buf[i] = (char) ch;
                         i++;
+                        ch = In.Read();
                     }
-                    return new StringToken(new String(buf, 0, i+1));
+                    String str = new string(buf, 0, i);
+
+                    return new StringToken(str);
                     //end edit
 
                 }
@@ -89,15 +93,17 @@ namespace Parse
                 // Integer constants
                 else if (ch >= '0' && ch <= '9')
                 {
-                    int i = ch - '0';
+                    int i = 0;
                     // TODO: scan the number and convert it to an integer
+                    char s = Convert.ToChar(ch);
 
                     //edit
                     String str = System.String.Empty;
-                    int j = 0;
+                    str += s;
                     while(In.Peek() >= '0' && In.Peek() <= '9')
                     {
-                        str += In.Read();
+                        char t = Convert.ToChar(In.Read());
+                        str += t;
                     }
                     i = Convert.ToInt32(str);
                     //end edit
@@ -108,15 +114,23 @@ namespace Parse
                 }
         
                 // Identifiers
-                else if (ch >= 'A' && ch <= 'z'
+                else if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')
+                    || (ch >= '$' && ch <= '&') || (ch >= '<' && ch <= '@')
+                    || ch == '!' || ch == '+' || ch == '*' || ch == '-'
+                    || ch == '/' || ch == ':' || ch == '_' || ch == '~')
                          // or ch is some other valid first character
                          // for an identifier
-                         ) {
+                {
                     // TODO: scan an identifier into the buffer
 
                     //edit
-                    int i = 0;
-                    while (In.Peek() != ' ')
+                    buf[0] = (char) ch;
+                    int i = 1;
+                    while (In.Peek() != ' ' && ((In.Peek() >= 'A' && In.Peek() <= 'Z')
+                        || (In.Peek() >= 'a' && In.Peek() <= 'z') || (In.Peek() >= '$' && In.Peek() <= '&')
+                        || (In.Peek() >= '<' && In.Peek() <= '@') || In.Peek() == '!' || In.Peek() == '+'
+                        || In.Peek() == '*' || In.Peek() == '-' || In.Peek() == '/' || In.Peek() == ':'
+                        || In.Peek() == '_' || In.Peek() == '~'))
                     {
                         buf[i] = (char)In.Read();
                         i++;
@@ -124,7 +138,7 @@ namespace Parse
                     // make sure that the character following the integer
                     // is not removed from the input stream
 
-                    return new IdentToken(new String(buf, 0, i+1));
+                    return new IdentToken(new String(buf, 0, i));
                     //end edit 
 
                 }
@@ -139,13 +153,17 @@ namespace Parse
                     In.Read();
                     return getNextToken();
                 }
+                //skip white space, tab, newline, etc
+                else if(ch == ' ' || ch == '\f' || ch == '\t' || ch =='\v' || ch =='\r' || ch == '\n')
+                {
+                    return getNextToken();
+                }
                 //end edit
     
                 // Illegal character
                 else
                 {
-                    Console.Error.WriteLine("Illegal input character '"
-                                            + (char)ch + '\'');
+                    Console.Error.WriteLine("Illegal input character '" + (char)ch + '\'');
                     return getNextToken();
                 }
             }
