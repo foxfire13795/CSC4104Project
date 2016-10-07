@@ -92,7 +92,6 @@ namespace Parse
                 // Integer constants
                 else if (ch >= '0' && ch <= '9')
                 {
-                    Console.WriteLine("There's a number!");
                     int i = 0;
                     // TODO: scan the number and convert it to an integer
                     char s = Convert.ToChar(ch);
@@ -114,10 +113,10 @@ namespace Parse
                 }
         
                 // Identifiers
-                else if (ch >= 'A' && ch <= 'z'
+                else if (ch >= 'A' && ch <= 'z')
                          // or ch is some other valid first character
                          // for an identifier
-                         ) {
+                {
                     // TODO: scan an identifier into the buffer
 
                     //edit
@@ -156,8 +155,7 @@ namespace Parse
                 // Illegal character
                 else
                 {
-                    Console.Error.WriteLine("Illegal input character '"
-                                            + (char)ch + '\'');
+                    Console.Error.WriteLine("Illegal input character '" + (char)ch + '\'');
                     return getNextToken();
                 }
             }

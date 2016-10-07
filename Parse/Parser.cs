@@ -41,6 +41,11 @@ namespace Parse
 {
     public class Parser
     {
+        public Nil nil = new Nil();
+
+        public BoolLit boolTrue = new BoolLit(true);
+
+        public BoolLit boolFalse = new BoolLit(false);
 	
         private Scanner scanner;
 
@@ -67,15 +72,15 @@ namespace Parse
             }
             else if (tok.getType().ToString().Equals("FALSE"))
             {
-                return new BoolLit(false);
+                return boolFalse;
             }
             else if (tok.getType().ToString().Equals("TRUE"))
             {
-                return new BoolLit(true);
+                return boolTrue;
             }
             else if (tok.getType().ToString().Equals("QUOTE"))
             {
-                return new Cons(new Ident("quote"), new Cons(parseExp(), new Nil()));
+                return new Cons(new Ident("quote"), new Cons(parseExp(), nil));
             }
             else if (tok.getType().ToString().Equals("INT"))
             {
@@ -112,15 +117,16 @@ namespace Parse
             //edit
             if(tok.getType().ToString().Equals("RPAREN"))
             {
-                return new Nil();
-            } else if (!tok.getType().ToString().Equals("DOT"))
+                return nil;
+            }
+            else if (!tok.getType().ToString().Equals("DOT"))
             {
                 Node a = parseExp(tok);
                 Node d;
                 Token lookahead = scanner.getNextToken();
                 if (lookahead.getType().ToString().Equals("DOT"))
                 {
-                    d = new Cons(new Ident("Dot"), new Cons(parseExp(), new Nil()));
+                    d = new Cons(new Ident("Dot"), new Cons(parseExp(), nil));
                 } else
                 {
                     d = parseRest(lookahead);
@@ -131,7 +137,7 @@ namespace Parse
             else
             {
                 // error handling
-                Console.WriteLine("Incorrect syntax");
+                Console.WriteLine("Syntax Error");
             }
             //end edit
 
