@@ -41,6 +41,11 @@ namespace Parse
 {
     public class Parser
     {
+        public Nil nil = new Nil();
+
+        public BoolLit boolTrue = new BoolLit(true);
+
+        public BoolLit boolFalse = new BoolLit(false);
 	
         private Scanner scanner;
 
@@ -61,70 +66,78 @@ namespace Parse
             {
                 return new Node();
             }
-            else if(tok.getType().Equals("LPAREN"))
+            else if(tok.getType().ToString().Equals("LPAREN"))
             {
-                parseRest();
+                return parseRest();
             }
-            else if (tok.getType().Equals("FALSE"))
+            else if (tok.getType().ToString().Equals("FALSE"))
             {
-                return new BoolLit(false);
+                return boolFalse;
             }
-            else if (tok.getType().Equals("TRUE"))
+            else if (tok.getType().ToString().Equals("TRUE"))
             {
-                return new BoolLit(true);
+                return boolTrue;
             }
-            else if (tok.getType().Equals("QUOTE"))
+            else if (tok.getType().ToString().Equals("QUOTE"))
             {
-                //quote then parseExp()
+                return new Cons(new Ident("quote"), new Cons(parseExp(), nil));
             }
-            else if (tok.getType().Equals("INT"))
+            else if (tok.getType().ToString().Equals("INT"))
             {
                 return new IntLit(tok.getIntVal());
             }
-            else if (tok.getType().Equals("STRING"))
+            else if (tok.getType().ToString().Equals("STRING"))
             {
                 return new StringLit(tok.getStringVal());
             }
-            else if (tok.getType().Equals("IDENT"))
+            else if (tok.getType().ToString().Equals("IDENT"))
             {
                 return new Ident(tok.getName());
             }
             else
             {
-                //syntax error
+                Console.WriteLine("Syntax error"); //errA
             }
             //end edit
 
             return null;
         }
-        
+
         protected Node parseRest()
+        {
+            Token tok = scanner.getNextToken();
+            return parseRest(tok);
+        }
+
+
+        protected Node parseRest(Token tok)
         {
             // TODO: write code for parsing a rest
 
             //edit
-            Token tok = scanner.getNextToken();
-            if(tok.getType().Equals("RPAREN"))
+            if(tok.getType().ToString().Equals("RPAREN"))
             {
-                //Nil
+                return nil;
+            }
+            else if (!tok.getType().ToString().Equals("DOT"))
+            {
+                Node a = parseExp(tok);
+                Node d;
+                Token lookahead = scanner.getNextToken();
+                if (lookahead.getType().ToString().Equals("DOT"))
+                {
+                    d = new Cons(new Ident("Dot"), new Cons(parseExp(), nil));
+                } else
+                {
+                    d = parseRest(lookahead);
+                }
+
+                return new Cons(a, d);
             }
             else
             {
-                parseExp(tok);
-                Token lookahead = scanner.getNextToken();
-                if(lookahead.getType().Equals("DOT"))
-                {
-                    //good, now parseExp()
-                }
-                else if(lookahead.getType().Equals("RPAREN"))
-                {
-                    //Nil
-                }
-                else
-                {
-                    //parseExp(lookahead)
-                }
-
+                // error handling
+                Console.WriteLine("Syntax Error"); //errB
             }
             //end edit
 

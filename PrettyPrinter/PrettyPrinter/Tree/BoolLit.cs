@@ -14,20 +14,25 @@ namespace Tree
         }
 
         //edit
-        override
-        public bool isBool() { return true; }
+        public override bool isBool() { return true; }
         //end edit
 
         public override void print(int n)
         {
-	    // There got to be a more efficient way to print n spaces.
-	    for (int i = 0; i < n; i++)
-                Console.Write(" ");
-
+	        // There got to be a more efficient way to print n spaces.
+	        for (int i = 0; i < n; i++)
+                {
+                    Console.Write(" ");
+                }
             if (boolVal)
-                Console.WriteLine("#t");
+                {
+                    Console.Write("#t");
+                }
             else
-                Console.WriteLine("#f");
+                {
+                    Console.Write("#f");
+                }
+                
         }
     }
 }

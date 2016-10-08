@@ -4,7 +4,7 @@ using System;
 
 namespace Tree
 {
-    public class Quote : Special
+    public class Quote : Special  //ERR: quote(...) not showing as '(...)
     {
         // TODO: Add any fields needed.
 
@@ -12,17 +12,56 @@ namespace Tree
 
         public Quote() {}
 
-        //edit
-        public Quote(Node n)
-        {
-
-        }
-        //end edit
-
         public override void print(Node t, int n, bool p)
         {
-            // TODO: Implement this function.
+            if (n > 0)
+            {
+                for (int i = 0; i < n; i++)
+                Console.Write(" ");
+            }
+
+            if (p == false)
+            {
+                Console.Write("'(");
+            }
+            else
+            {
+                if (t.getCar() != null)
+                {
+                    t.getCar().print(n, true);
+                }
+            }
+               
         }
+
+
+
+
+        //public override void print(Node t, int n, bool p)
+        //{
+        // TODO: Implement this function.
+
+        //edit
+        //if(n > 0)
+        //{
+        //   for (int i = 0; i < n; i++)
+        //    {
+        //      Console.Write(" ");
+        //    }
+        //}
+        //if (p == false)
+        //{
+        //    Console.Write("'(");
+        //}
+        //else
+        //{
+        //   if(t.getCar() != null)
+        //    {
+        //        t.getCar().print(n, true);
+        //    }
+        //}
+        //end edit
+        //}
     }
 }
 

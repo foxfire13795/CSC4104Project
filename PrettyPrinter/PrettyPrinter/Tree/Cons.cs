@@ -17,17 +17,18 @@ namespace Tree
             parseList();
         }
 
-        //edit
         public override bool isPair() { return true; }
 
         public override void setCar(Node a)
         {
             car = a;
+            parseList();
         }
 
         public override void setCdr(Node d)
         {
             cdr = d;
+            parseList();
         }
 
         public override Node getCar()
@@ -39,8 +40,7 @@ namespace Tree
         {
             return cdr;
         }
-
-        //end edit
+        
 
         // parseList() `parses' special forms, constructs an appropriate
         // object of a subclass of Special, and stores a pointer to that
@@ -55,7 +55,6 @@ namespace Tree
             // TODO: implement this function and any helper functions
             // you might need.
 
-            //edit
             if(!car.isSymbol())
             {
                 form = new Regular();
@@ -97,17 +96,56 @@ namespace Tree
                 form = new Regular();
             }
 
-            //end edit
-        }
- 
-        public override void print(int n)
-        {
-            form.print(this, n, false);
         }
 
+        public override void print(int n)
+        {
+            form.print(this.car, n, false);
+            form.print(this.cdr, n, true);
+        }
+
+        //public override void print(int n, bool p)
+        //{
+        //    if (!this.car.isNull())
+        //    {
+        //        form.print(this.car, n, p);
+        //        if (p && !this.cdr.isNull())
+        //        {
+        //            Console.Write(" ");
+        //        }
+
+        //        if (!this.cdr.isNull())
+        //        {
+        //            if(this.cdr.getCar().isPair())
+        //            {
+        //                form.print(this.cdr, n, false);
+        //            }
+        //            else
+        //                form.print(this.cdr, n, true);
+        //        }
+        //        else
+        //        {
+        //            this.cdr.print(n, true);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        this.car.print(n, p);
+        //    }
+        //}
+
+        //WOAH WOAH???
         public override void print(int n, bool p)
         {
-            form.print(this, n, p);
+            if (this.car.isPair())
+            {
+                form.print(this.car, n, false);
+            }
+            else
+            {
+                form.print(this.car, n, p);
+            }
+            form.print(this.cdr, n, true);
         }
     }
 }

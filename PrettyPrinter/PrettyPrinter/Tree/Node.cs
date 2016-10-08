@@ -1,4 +1,5 @@
 // Node -- Base class for parse tree node objects
+using System;
 
 namespace Tree
 {
@@ -25,14 +26,22 @@ namespace Tree
         // subclasses of Node as well.
         public virtual void print(int n, bool p)
         {
-            print(n);
+            //edit
+            if(p == true && n > 0)
+            {
+                print(0 - n);
+            }
+            else
+            {
+                print(n);
+            }
+            
         }
 
         // For parsing Cons nodes, for printing trees, and later for
         // evaluating them, we need some helper functions that test
         // the type of a node and that extract some information.
-
-        // TODO: implement these in the appropriate subclasses to return true. --> DONE
+        
         public virtual bool isBool()   { return false; }  // BoolLit
         public virtual bool isNumber() { return false; }  // IntLit
         public virtual bool isString() { return false; }  // StringLit
@@ -45,10 +54,11 @@ namespace Tree
         // using parseList.
         public virtual Node getCar() { return null; }
         public virtual Node getCdr() { return null; }
-        public virtual void setCar(Node a) { }
-        public virtual void setCdr(Node d) { }
-
         //edit
+        public virtual void setCar(Node a) { Console.WriteLine("Not a Cons Node"); } //that's an error
+        public virtual void setCdr(Node d) { Console.WriteLine("Not a Cons Node"); } //that's an error
+        
+
         public virtual string getName() { return null; }
         //end edit
     }
