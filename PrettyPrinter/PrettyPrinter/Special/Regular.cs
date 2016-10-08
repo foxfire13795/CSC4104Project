@@ -22,6 +22,10 @@ namespace Tree
                 if(t.getCar() != null)
                 {
                     Console.Write(" ");
+                    if (t.getCar().isNull())
+                    {
+                        Console.Write("(");
+                    }
                 }
                 t.print(n, p);
             }
