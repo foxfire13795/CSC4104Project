@@ -55,11 +55,7 @@ namespace Tree
             // TODO: implement this function and any helper functions
             // you might need.
 
-            if(!car.isSymbol())
-            {
-                form = new Regular();
-            }
-            else if(car.getName() == "begin")
+            if(car.getName() == "begin")
             {
                 form = new Begin();
             }
