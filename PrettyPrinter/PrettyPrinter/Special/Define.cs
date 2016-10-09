@@ -33,6 +33,10 @@ namespace Tree
                     {
                         Console.Write(" ");
                     }
+                    if (t.getCdr().isPair())
+                    {
+                        Console.WriteLine();
+                    }
                     t.getCdr().print(n, true); //should either use recursion or return a Nil node
                 }
                 else
