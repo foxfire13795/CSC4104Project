@@ -96,8 +96,19 @@ namespace Tree
 
         public override void print(int n)
         {
-            form.print(this.car, n, false);
-            form.print(this.cdr, n, true);
+            Quote q = new Quote();
+            if(this.cdr != null && this.cdr.getCar() != null && !this.getCdr().getCar().isPair() && form.GetType().IsAssignableFrom(q.GetType())) //new quote doesn't work lol
+            {
+                Console.Write("'");
+                form.print(this.car, n, true);
+                form.print(this.cdr, n, true);
+            }
+            else
+            {
+                form.print(this.car, n, false);
+                form.print(this.cdr, n, true);
+            }
+            
         }
 
         public override void print(int n, bool p)
@@ -105,7 +116,6 @@ namespace Tree
             if (this.car.isPair())
             {
                 car.print(n, false);
-                //form.print(this.car, n, false);
             }
             else
             {
