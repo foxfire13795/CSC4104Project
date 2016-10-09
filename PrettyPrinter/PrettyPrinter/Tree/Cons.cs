@@ -100,42 +100,12 @@ namespace Tree
             form.print(this.cdr, n, true);
         }
 
-        //public override void print(int n, bool p)
-        //{
-        //    if (!this.car.isNull())
-        //    {
-        //        form.print(this.car, n, p);
-        //        if (p && !this.cdr.isNull())
-        //        {
-        //            Console.Write(" ");
-        //        }
-
-        //        if (!this.cdr.isNull())
-        //        {
-        //            if(this.cdr.getCar().isPair())
-        //            {
-        //                form.print(this.cdr, n, false);
-        //            }
-        //            else
-        //                form.print(this.cdr, n, true);
-        //        }
-        //        else
-        //        {
-        //            this.cdr.print(n, true);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        this.car.print(n, p);
-        //    }
-        //}
-
-        //WOAH WOAH???
         public override void print(int n, bool p)
         {
             if (this.car.isPair())
             {
-                form.print(this.car, n, false);
+                car.print(n, false);
+                //form.print(this.car, n, false);
             }
             else
             {
