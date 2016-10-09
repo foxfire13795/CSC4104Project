@@ -21,14 +21,15 @@ namespace Tree
         {
 
             //There got to be a more efficient way to print n spaces.
-            if(n > 0)
-            for (int i = 0; i < n; i++)
-                Console.Write(" ");
-
             if (p)
-                Console.Write(")");
+                Console.Write(") ");
             else
-                Console.Write("()");
+            {
+                if (n > 0)
+                    for (int i = 0; i < n; i++)
+                        Console.Write(" ");
+                Console.Write(") ");
+            }
         }
 
 
