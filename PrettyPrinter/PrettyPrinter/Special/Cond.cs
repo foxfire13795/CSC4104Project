@@ -30,8 +30,8 @@ namespace Tree
                 {
                     if (t.getCar().isPair())
                     {
-                        t.indent(n);
-                        t.getCar().print(0 - n, false);
+                        t.indent(n + 4);
+                        t.getCar().print(0 - n, true);
                         Console.WriteLine();
                     }
                     else
@@ -40,7 +40,7 @@ namespace Tree
                         Console.WriteLine();
                     }
 
-                    printHelper(t.getCdr(), n + 4);
+                    printHelper(t.getCdr(), n);
 
                 }
                 else
@@ -62,7 +62,7 @@ namespace Tree
                 t.getCdr().print(n + 4, true);
                 Console.WriteLine();
             }
-            else
+            else if (t.getCar() != null)
             {
                 t.getCar().print(n + 4, false);
                 Console.WriteLine();
