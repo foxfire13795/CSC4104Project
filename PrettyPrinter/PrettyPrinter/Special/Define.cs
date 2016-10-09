@@ -33,7 +33,7 @@ namespace Tree
                     {
                         Console.Write(" ");
                     }
-                    if (t.getCdr().isPair())
+                    if (t.getCar().isPair())
                     {
                         Console.WriteLine();
                     }
