@@ -17,7 +17,7 @@ namespace Tree
         {
             if(!p)
             {
-                Console.WriteLine("(cond");
+                Console.WriteLine("(cond ");
             }
             else
             {

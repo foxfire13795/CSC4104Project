@@ -26,7 +26,7 @@ namespace Tree
             }
             else
             {
-                if (t.getCar() != null)
+                if (!t.getCar().isNull())
                 {
                     t.getCar().print(n, true);
                 }

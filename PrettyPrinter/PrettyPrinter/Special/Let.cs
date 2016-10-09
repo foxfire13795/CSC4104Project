@@ -11,9 +11,49 @@ namespace Tree
         // TODO: Add an appropriate constructor.
 	public Let() { }
 
+        public override void print(Node t, int n, bool p)
+        {
+            if (!p)
+            {
+                if (n > 0)
+                {
+                    for (int i = 0; i < n; i++)
+                        Console.Write(" ");
+                }
+
+                Console.Write("(let ");
+            }
+            if (!t.isNull() && t.getCar() != null)
+            {
+                if (!t.getCar().isNull())
+                {
+                    if (t.getCar().isPair())
+                    {
+                        Console.Write(" (");
+                        t.getCar().print(n, false);
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        t.getCar().print(n, p);
+                        Console.WriteLine();
+                    }
+
+                    t.getCdr().print(n, true);
+                    Console.WriteLine();
+
+                }
+                else
+                {
+                    t.getCar().print(n, p);
+                    Console.WriteLine();
+                }
+            }
+        }
+
         //WOAH WOAH WOAH
 
-        public override void print(Node t, int n, bool p)
+        /*public override void print(Node t, int n, bool p)
         {
             if (p)
             {
@@ -47,7 +87,7 @@ namespace Tree
             t.getCar().print(n + 4, false);
             Console.WriteLine();
             printLet(t.getCdr(), n);
-        }
+        }*/
         //end woah
 
 
