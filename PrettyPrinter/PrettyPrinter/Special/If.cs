@@ -24,7 +24,7 @@ namespace Tree
 
                 Console.Write("(if ");
             }
-            if(!t.isNull() && t.getCar() != null)
+            if (!t.isNull() && t.getCar() != null)
             {
                 if(!t.getCar().isNull())
                 {
@@ -32,7 +32,8 @@ namespace Tree
                     {
                         t.getCar().print(0 - n, false);
                         Console.WriteLine();
-                    }else
+                    }
+                    else
                     {
                         t.getCar().print(n, p);
                         Console.WriteLine();
@@ -52,7 +53,8 @@ namespace Tree
         {
             if(t.getCdr().isNull())
             {
-                t.getCar().print(n + 4, false);
+                t.indent(n + 4);
+                t.getCar().print(0 - n, false);
                 Console.WriteLine();
                 t.indent(n);
                 t.getCdr().print(n + 4, true);
