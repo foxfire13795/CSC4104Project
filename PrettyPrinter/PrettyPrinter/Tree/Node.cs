@@ -60,6 +60,14 @@ namespace Tree
         
 
         public virtual string getName() { return null; }
+
+        public virtual void indent(int n)
+        {
+            for(int i = 0; i < n; i++)
+            {
+                Console.Write(" ");
+            }
+        }
         //end edit
     }
 }
