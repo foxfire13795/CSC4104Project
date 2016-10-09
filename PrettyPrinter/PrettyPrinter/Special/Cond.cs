@@ -22,6 +22,7 @@ namespace Tree
                 }
 
                 Console.Write("(cond ");
+                Console.WriteLine();
             }
             if (!t.isNull() && t.getCar() != null)
             {
@@ -29,7 +30,8 @@ namespace Tree
                 {
                     if (t.getCar().isPair())
                     {
-                        t.getCar().print(n, false);
+                        t.indent(n);
+                        t.getCar().print(0 - n, false);
                         Console.WriteLine();
                     }
                     else
@@ -38,8 +40,7 @@ namespace Tree
                         Console.WriteLine();
                     }
 
-                    t.getCdr().print(n, true);
-                    Console.WriteLine();
+                    printHelper(t.getCdr(), n + 4);
 
                 }
                 else
@@ -50,36 +51,24 @@ namespace Tree
             }
         }
 
-        //edit
-        /*public override void print(Node t, int n, bool p)
+        public void printHelper(Node t, int n)
         {
-            if(!p)
+            if (t.getCdr() != null && t.getCdr().isNull())
             {
-                Console.WriteLine("(cond ");
+                t.indent(n + 4);
+                t.getCar().print(0 - n, false);
+                Console.WriteLine();
+                t.indent(n);
+                t.getCdr().print(n + 4, true);
+                Console.WriteLine();
             }
             else
             {
-                for(int i = 0; i < n; i++)
-                {
-                    Console.Write(" ");
-                }
-            }
-            if(t != null && !t.isNull())
-            {
-                print(t.getCar(), n, true);
-                print(t.getCdr(), n, true);
-            }
-            else if(t != null)
-            {
-                t.print(n, true);
+                t.getCar().print(n + 4, false);
+                Console.WriteLine();
+                printHelper(t.getCdr(), n);
             }
         }
-
-        public void printCond(Node t, int n)
-        {
-
-        }*/
-        //end edit
     }
 }
 

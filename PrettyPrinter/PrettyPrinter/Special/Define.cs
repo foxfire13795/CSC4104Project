@@ -37,7 +37,7 @@ namespace Tree
                     {
                         Console.WriteLine();
                     }
-                    t.getCdr().print(n, true); //should either use recursion or return a Nil node
+                    t.getCdr().print(n + 4, true); //should either use recursion or return a Nil node
                 }
                 else
                 {

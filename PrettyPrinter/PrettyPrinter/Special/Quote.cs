@@ -33,35 +33,6 @@ namespace Tree
             }
                
         }
-
-
-
-
-        //public override void print(Node t, int n, bool p)
-        //{
-        // TODO: Implement this function.
-
-        //edit
-        //if(n > 0)
-        //{
-        //   for (int i = 0; i < n; i++)
-        //    {
-        //      Console.Write(" ");
-        //    }
-        //}
-        //if (p == false)
-        //{
-        //    Console.Write("'(");
-        //}
-        //else
-        //{
-        //   if(t.getCar() != null)
-        //    {
-        //        t.getCar().print(n, true);
-        //    }
-        //}
-        //end edit
-        //}
     }
 }
 
