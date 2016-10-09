@@ -10,10 +10,48 @@ namespace Tree
 
         // TODO: Add an appropriate constructor.
 	public Cond() { }
-        
+
+        public override void print(Node t, int n, bool p)
+        {
+            if (!p)
+            {
+                if (n > 0)
+                {
+                    for (int i = 0; i < n; i++)
+                        Console.Write(" ");
+                }
+
+                Console.Write("(cond ");
+            }
+            if (!t.isNull() && t.getCar() != null)
+            {
+                if (!t.getCar().isNull())
+                {
+                    if (t.getCar().isPair())
+                    {
+                        t.getCar().print(n, false);
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        t.getCar().print(n, p);
+                        Console.WriteLine();
+                    }
+
+                    t.getCdr().print(n, true);
+                    Console.WriteLine();
+
+                }
+                else
+                {
+                    t.getCar().print(n, p);
+                    Console.WriteLine();
+                }
+            }
+        }
 
         //edit
-        public override void print(Node t, int n, bool p)
+        /*public override void print(Node t, int n, bool p)
         {
             if(!p)
             {
@@ -40,7 +78,7 @@ namespace Tree
         public void printCond(Node t, int n)
         {
 
-        }
+        }*/
         //end edit
     }
 }
