@@ -30,7 +30,6 @@ namespace Tree
                 {
                     if(t.getCar().isPair())
                     {
-                        Console.Write(" (");
                         t.getCar().print(n, false);
                         Console.WriteLine();
                     }else
