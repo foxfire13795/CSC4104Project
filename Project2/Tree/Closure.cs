@@ -43,7 +43,7 @@ namespace Tree
         // TODO: The method apply() should be defined in class Node
         // to report an error.  It should be overridden only in classes
         // BuiltIn and Closure.
-        public override Node apply (Node args)
+        public override Node apply(Node args)
         {
             Environment e = this.getEnv();
             Node f = getFun();
@@ -56,6 +56,8 @@ namespace Tree
                 symbol = symbol.getCdr();
                 args = args.getCdr();
             }
+
+            return f.eval(e);
         }
 
         public override Node eval(Node n, Environment env)
