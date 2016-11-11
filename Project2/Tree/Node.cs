@@ -4,8 +4,10 @@ using System;
 
 namespace Tree
 {
-    public class Node : INode //TODO: write eval/apply methods
+    public class Node : INode
     {
+        private Ident id;
+
         // The argument of print(int) is the number of characters to indent.
         // Every subclass of Node must implement print(int).
         public virtual void print(int n) { }
@@ -41,8 +43,7 @@ namespace Tree
         public virtual bool isSymbol() { return false; }  // Ident
         public virtual bool isNull()   { return false; }  // Nil
         public virtual bool isPair()   { return false; }  // Cons
-
-        public virtual bool isProcedure() { return false; }
+        public virtual bool isProcedure() { return false; } // Closure and BuiltIn
 
         // Since C# does not have covariant override, it is not possible
         // for the getCar and getCdr methods to implement the interface
@@ -80,16 +81,20 @@ namespace Tree
             return "";
         }
 
-        //mine
-        public virtual Node apply(Node args)
+        public virtual Node apply(Node n)
         {
             return Nil.getInstance();
         }
 
-        public virtual Node eval(Node node, Environment env)
+        public virtual Node eval(Environment env)
         {
-            return Nil.getInstance(); //temp placeholder
-        }
+            if(this is Ident)
+            {
+                id = new Ident(this.getName());
+                return id.eval(this, env);
+            }
 
+            return this;
+        }
     }
 }

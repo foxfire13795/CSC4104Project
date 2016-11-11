@@ -16,20 +16,20 @@ namespace Tree
     public class Closure : Node
     {
         private Node fun;		// a lambda expression
-        private Environment env;	// the environment in which the function was defined
+        private Environment env;	// the environment in which
+                                        // the function was defined
 
-        public Closure(Node f, Environment e)
-        {
-            fun = f;  env = e;
-        }
+        public Closure(Node f, Environment e)	{ fun = f;  env = e; }
 
         public Node getFun()		{ return fun; }
         public Environment getEnv()	{ return env; }
 
+        // TODO: The method isProcedure() should be defined in
+        // class Node to return false.
         public override bool isProcedure()	{ return true; }
 
-        public override void print(int n)
-        {
+        public override void print(int n) {
+            // there got to be a more efficient way to print n spaces
             for (int i = 0; i < n; i++)
                 Console.Write(' ');
             Console.WriteLine("#{Procedure");
@@ -43,9 +43,24 @@ namespace Tree
         // TODO: The method apply() should be defined in class Node
         // to report an error.  It should be overridden only in classes
         // BuiltIn and Closure.
-        public /* override */ Node apply (Node args)
+        public override Node apply (Node args)
         {
-            return new StringLit("Error: Closure.apply not yet implemented");
+            Environment e = this.getEnv();
+            Node f = getFun();
+            Node symbol = f.getCar();
+            f = f.getCdr().getCar();
+
+            while(args != null && !args.getCar().isNull())
+            {
+                e.define(symbol.getCar(), args.getCar());
+                symbol = symbol.getCdr();
+                args = args.getCdr();
+            }
+        }
+
+        public override Node eval(Node n, Environment env)
+        {
+            return Nil.getInstance();
         }
     }    
 }
