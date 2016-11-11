@@ -51,6 +51,17 @@ public class Scheme4101
 
         // TODO: Create and populate the built-in environment and
         // create the top-level environment
+        Tree.Environment builtInEnv = new Tree.Environment();
+        Ident id;
+        string[] builtInIds = { "b+", "b-", "b*", "b/", "b=", "b<", "b>", "car", "cdr", "cons", "set-car!", "set-cdr!", "symbol?", "number?", "null?", "pair?", "eq?", "procedure?", "display", "newline", "exit", "quit", "read", "write", "eval", "apply", "interaction-environment"};
+        foreach(string s in builtInIds)
+        {
+            id = new Ident(s);
+            builtInEnv.define(id, new BuiltIn(id));
+        }
+
+        Tree.Environment topLevelEnv = new Tree.Environment(builtInEnv);
+        BuiltIn useTopLevelEnv = new BuiltIn(topLevelEnv);
 
         // Read-eval-print loop
 
@@ -58,8 +69,19 @@ public class Scheme4101
         root = (Node) parser.parseExp();
         while (root != null) 
         {
-            root.print(0);
-            root = (Node) parser.parseExp();
+            if(topLevelEnv != null)
+            {
+                try
+                {
+                    root.eval(topLevelEnv).print(0);
+                } catch (NullReferenceException e)
+                {
+                    Console.WriteLine("NullReferenceException: Undefined Variable");
+                } finally
+                {
+                    root = (Node)parser.parseExp();
+                }
+            }
         }
 
         return 0;
