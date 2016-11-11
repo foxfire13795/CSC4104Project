@@ -60,7 +60,7 @@ namespace Tree
             return f.eval(e);
         }
 
-        public override Node eval(Node n, Environment env)
+        public Node eval(Node n, Environment env)
         {
             return Nil.getInstance();
         }
