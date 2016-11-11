@@ -99,19 +99,37 @@ namespace Tree
                 return env.lookup(id);
             else
                 // get the value out of the list we got from find()
-		        return val.getCar();
+		return val.getCar();
         }
 
 
         public void define(Node id, Node val)
         {
-            // TODO: implement this function
+            Node value = find(id, frame);
+            if(value == null)
+            {
+                frame = new Cons(new Cons(id, new Cons(val, Nil.getInstance())), frame);
+            } else
+            {
+                value.setCar(val);
+            }
         }
 
 
         public void assign(Node id, Node val)
         {
-            // TODO: implement this function
+            Node value = find(id, frame);
+
+            if(value == null && env == null)
+            {
+                Console.Error.WriteLine("undefined variable " + id.getName());
+            } else if(value == null)
+            {
+                assign(id, env);
+            } else
+            {
+                setCar(new Cons(id, val));
+            }
         }
     }
 }
