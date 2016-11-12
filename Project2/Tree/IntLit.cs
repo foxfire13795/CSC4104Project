@@ -18,6 +18,11 @@ namespace Tree
             Printer.printIntLit(n, intVal);
         }
 
+        public override int getVal()
+        {
+            return intVal;
+        }
+
         public override bool isNumber()
         {
             return true;

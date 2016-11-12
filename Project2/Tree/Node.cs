@@ -81,6 +81,21 @@ namespace Tree
             return "";
         }
 
+        public virtual int getVal()
+        {
+            return 0;
+        }
+
+        public virtual bool getBool()
+        {
+            return false;
+        }
+
+        public virtual string getStr()
+        {
+            return "";
+        }
+
         public virtual Node apply(Node n)
         {
             return Nil.getInstance();

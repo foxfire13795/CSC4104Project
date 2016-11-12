@@ -7,15 +7,35 @@ namespace Tree
     public class StringLit : Node
     {
         private string stringVal;
+        private bool newline;
 
         public StringLit(string s)
         {
             stringVal = s;
+            newline = false;
+        }
+
+        public StringLit(string s, bool b)
+        {
+            stringVal = s;
+            newline = true;
         }
 
         public override void print(int n)
         {
-            Printer.printStringLit(n, stringVal);
+            if (newline)
+            {
+                Console.WriteLine(stringVal);
+            }
+            else
+            {
+                Printer.printStringLit(n, stringVal);
+            }
+        }
+
+        public override string getStr()
+        {
+            return stringVal;
         }
 
         public override bool isString()

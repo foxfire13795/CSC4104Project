@@ -29,6 +29,11 @@ namespace Tree
             Printer.printBoolLit(n, boolVal);
         }
 
+        public override bool getBool()
+        {
+            return boolVal;
+        }
+
         public override bool isBool()
         {
             return true;
