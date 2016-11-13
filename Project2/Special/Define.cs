@@ -30,7 +30,7 @@ namespace Tree
                 Closure function = new Closure(new Cons(parm, body), env);
                 env.define(name, function); //other uses name.getCar()
             }
-            return new StringLit(";no values returned");
+            return new StringLit(";no values returned", true);
         }
     }
 }
