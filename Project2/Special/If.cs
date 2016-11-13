@@ -12,6 +12,25 @@ namespace Tree
         {
             Printer.printIf(t, n, p);
         }
+
+        //spring
+        //using the scheme function
+        public override Node eval(Node exp, Environment env)
+        {
+            if(exp.getCdr().getCar().eval(env).getBool())
+            {
+                return exp.getCdr().getCdr().getCar().eval(env); //for true
+            }
+            else if(!exp.getCdr().getCdr().getCdr().isNull())
+            {
+                return exp.getCdr().getCdr().getCdr().getCar().eval(env); //for false
+            }
+            else
+            {
+                //if else is not included
+                return Nil.getInstance();
+            }
+        }
     }
 }
 

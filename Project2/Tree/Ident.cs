@@ -27,6 +27,12 @@ namespace Tree
         {
             return true;
         }
+
+        //spring
+        public override Node eval(Node exp, Environment env)
+        {
+            return env.lookup(this); //looks up and returns the value for the ident
+        }
     }
 }
 

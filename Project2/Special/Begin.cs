@@ -12,9 +12,12 @@ namespace Tree
         {
             Printer.printBegin(t, n, p);
         }
-        public Node eval(Node node, Environment env)
+
+        //spring
+        public override Node eval(Node node, Environment env)
         {
-            return Nil.getInstance();
+            return null; //this returns null because it it only used to start the program
+                         //if all works out properly, the program will skip it and move on to evaluate the next exp
         }
     }
 }

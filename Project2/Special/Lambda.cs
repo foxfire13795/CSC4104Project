@@ -11,7 +11,14 @@ namespace Tree
         public override void print(Node t, int n, bool p)
         {
             Printer.printLambda(t, n, p);
-  	}
+  	    }
+
+        //spring
+        //using the scheme function
+        public override Node eval(Node exp, Environment env)
+        {
+            return new Closure(exp.getCdr(), env);
+        }
     }
 }
 
