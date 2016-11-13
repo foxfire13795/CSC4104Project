@@ -42,6 +42,12 @@ namespace Tree
         {
             return true;
         }
+
+        //spring
+        public override Node eval(Node exp, Environment env)
+        {
+            return this; //returns String node with stringVal
+        }
     }
 }
 

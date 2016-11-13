@@ -101,6 +101,14 @@ namespace Tree
             return Nil.getInstance();
         }
 
+        //spring
+        public virtual Node eval(Node exp, Environment env)
+        {
+            return Nil.getInstance();
+        }
+
+
+        //Brittani
         public virtual Node eval(Environment env)
         {
             if(this is Ident)
