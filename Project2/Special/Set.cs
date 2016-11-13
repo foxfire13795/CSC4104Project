@@ -17,12 +17,19 @@ namespace Tree
         //from scheme function
         public override Node eval(Node exp, Environment env)
         {
-            Node binding = env.lookup(exp.getCar().getCdr());
-            if(binding.isPair())
+            Node binding = env.lookup(exp.getCdr().getCar());
+
+            if(binding != null)
             {
-                binding.setCdr(eval(exp.getCar().getCdr().getCdr(), env));
+                Node id = exp.getCdr().getCar();
+                Node val = exp.getCdr().getCdr().getCar();
+
+                env.define(id, val);
+
+                return new StringLit(";no values returned", true);
             }
-            return binding;
+
+            return null;
         }
     }
 }
