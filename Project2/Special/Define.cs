@@ -28,9 +28,9 @@ namespace Tree
                 Node body = exp.getCdr().getCdr();
                 //...this
                 Closure function = new Closure(new Cons(parm, body), env);
-                env.define(name, function); //other uses name.getCar()
+                env.define(name.getCar(), function);
             }
-            return new StringLit(";no values returned", true);
+            return new StringLit(";no values returned");
         }
     }
 }

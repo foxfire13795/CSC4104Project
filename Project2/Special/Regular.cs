@@ -14,58 +14,50 @@ namespace Tree
         }
 
         //spring
-        //dont use this!!! --temporary code
-        public override Node eval(Node t, Environment env)
+        public override Node eval(Node exp, Environment env)
         {
-            Node first;
-            Node args;
+            Node car = exp.getCar();
+            Node toApply = evallist(exp.getCdr(), env);
 
-            first = t.getCar();
-            args = eval_list(t.getCdr(), env);
-
-            while (first.isSymbol())
+            while (car.isSymbol())
             {
-                first = env.lookup(first);
+                car = env.lookup(car);
             }
-
-            if (first == null || first.isNull())
+            if (car.isNull() || car == null)
             {
                 return null;
             }
-            if (first.isProcedure())
+            else if (car.isProcedure())
             {
-                return first.apply(args);
+                return car.apply(toApply);
+            }
+            else if (toApply.getCar().isNull()) //added .getCar()
+            {
+                return car.eval(env); 
             }
             else
-            {
-                return first.eval(env).apply(args); //returning a single value only works without apply but apply isn't working...
-            }
-
+                return car.eval(env).apply(toApply);
         }
 
-        public Node eval_list(Node t, Environment env)
+        public Node evallist(Node exp, Environment env)
         {
-            if (t == null || t.isNull())
+            if (exp.isNull() || exp == null)
             {
-                Node list = new Cons(Nil.getInstance(), Nil.getInstance());
-                return list;
+                return new Cons(Nil.getInstance(), Nil.getInstance());
             }
             else
             {
-                Node arg1, rest;
-                arg1 = t.getCar();
-                rest = t.getCdr();
-
-                if (arg1.isSymbol())
+                Node car = exp.getCar();
+                Node cdr = exp.getCdr();
+                if(car.isSymbol())
                 {
-                    arg1 = env.lookup(arg1);
+                    car = env.lookup(car);
                 }
-                if (arg1 == null || arg1.isNull())
+                if(car.isNull() || car == null)
                 {
                     return null;
                 }
-                Node list = new Cons(arg1.eval(env), eval_list(rest, env));
-                return list;
+                return new Cons(car.eval(env), evallist(cdr, env));
             }
         }
     }
