@@ -12,6 +12,13 @@ namespace Tree
         {
             Printer.printQuote(t, n, p);
         }
+
+        //spring
+        //using the scheme function
+        public override Node eval(Node exp, Environment env)
+        {
+            return exp.getCdr().getCar(); 
+        }
     }
 }
 

@@ -12,6 +12,18 @@ namespace Tree
         {
             Printer.printSet(t, n, p);
         }
+
+        //spring
+        //from scheme function
+        public override Node eval(Node exp, Environment env)
+        {
+            Node binding = env.lookup(exp.getCar().getCdr());
+            if(binding.isPair())
+            {
+                binding.setCdr(eval(exp.getCar().getCdr().getCdr(), env));
+            }
+            return binding;
+        }
     }
 }
 
