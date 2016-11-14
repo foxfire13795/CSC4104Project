@@ -17,7 +17,7 @@ namespace Tree
         //from scheme function...mostly
         public override Node eval(Node exp, Environment env)
         {
-            Node name = exp.getCdr().getCar(); //we'll see
+            Node name = exp.getCdr().getCar(); 
             if(name.isSymbol())
             {
                 env.define(name, exp.getCdr().getCdr().getCar());

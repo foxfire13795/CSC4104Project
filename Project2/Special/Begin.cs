@@ -14,9 +14,9 @@ namespace Tree
         }
 
         //spring
-        public override Node eval(Node node, Environment env)
+        public override Node eval(Node exp, Environment env)
         {
-            return null; //this returns null because it it only used to start the program
+            return exp.getCdr().eval(env); //this returns null because it it only used to start the program
                          //if all works out properly, the program will skip it and move on to evaluate the next exp
         }
     }

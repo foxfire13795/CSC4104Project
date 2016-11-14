@@ -27,7 +27,6 @@ namespace Tree
             }
             else
             {
-                //if else is not included
                 return Nil.getInstance();
             }
         }

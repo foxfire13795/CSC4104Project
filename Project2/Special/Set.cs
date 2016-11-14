@@ -13,8 +13,7 @@ namespace Tree
             Printer.printSet(t, n, p);
         }
 
-        //spring
-        //from scheme function
+        //fixed by Brittani
         public override Node eval(Node exp, Environment env)
         {
             Node binding = env.lookup(exp.getCdr().getCar());
@@ -28,7 +27,6 @@ namespace Tree
 
                 return new StringLit(";no values returned", true);
             }
-
             return null;
         }
     }

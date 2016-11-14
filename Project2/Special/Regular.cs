@@ -31,7 +31,7 @@ namespace Tree
             {
                 return car.apply(toApply);
             }
-            else if (toApply.getCar().isNull()) //added .getCar()
+            else if (toApply.getCar().isNull()) 
             {
                 return car.eval(env); 
             }

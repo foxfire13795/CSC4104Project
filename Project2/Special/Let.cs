@@ -14,13 +14,6 @@ namespace Tree
         }
 
         //spring
-        //from scheme function
-        //public Environment letEnv(Node exp, Environment env)
-        //{
-            //env.define(exp.getCdr().getCar().getCar(), eval(exp.getCdr().getCar().getCdr().getCar(), env)); //not sure if should be define or assign?
-            //return env;
-        //}
-
         public Environment letEnv(Node exp, Environment env)
         {
             Node defName;
@@ -56,7 +49,6 @@ namespace Tree
                 env = letEnv(def, env);
             }
             return exp.getCdr().getCdr().eval(env);
-            //return eval(exp.getCdr().getCdr(), letEnv(exp, env));
         }
 
     }
