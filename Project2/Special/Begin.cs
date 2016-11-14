@@ -12,12 +12,25 @@ namespace Tree
         {
             Printer.printBegin(t, n, p);
         }
+        
 
-        //spring
         public override Node eval(Node exp, Environment env)
         {
-            return exp.getCdr().eval(env); //this returns null because it it only used to start the program
-                         //if all works out properly, the program will skip it and move on to evaluate the next exp
+            Node retNode = exp.getCdr();
+            Node evalNode = null;
+            if(!retNode.isNull())
+            {
+                evalNode = retNode.getCdr();
+                retNode = retNode.getCar().eval(env);
+                while (!evalNode.isNull())
+                {
+                    retNode = evalNode.getCar().eval(env);
+                    evalNode = evalNode.getCdr();
+                }
+                return retNode;
+            }
+            return Nil.getInstance();
+            
         }
     }
 }
